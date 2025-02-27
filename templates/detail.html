@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container main row mt-3">
+        <div class="col-8">
+            <h4>{{new.title}}</h4>
+            <small class="text-muted">Created: {{new.created_at|timesince}} ago | Updated: {{new.created_at|timesince}} ago | Author: @{{new.author}}</small>
+            <img src="{{new.image}}" alt="New image" class="article-img img-fluid">
+            <p class="mt-3" style="text-align: justify; text-justify: inter-word;">{{new.body|linebreaks|safe}}</p>
+            {% if request.user == new.author %}
+            <a href="{% url 'new_update' new.id%}" class="btn btn-warning pro-link">Update</a>
+            <a href="{% url 'new_delete' new.id %}" class="btn btn-danger pro-link">Delete</a>
+            {% endif %}
+        </div>
+        <div class="col-4">
+            <h5>Latest News</h5>
+            {% for i in news %}
+                {% if not new == i %}
+                <div class="card mt-2">
+                    <div class="card-body">
+                        <span class="card-text">{{i.title}}</span><br>
+                        <a href="{% url 'new_detail' i.id %}" class="pro-link card-link">Read More</a>
+                        <small class="text-muted">{{ i.created_at|timesince }} ago</small>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <h2 class="mt-3">Delete - {{new.title}}</h2>
+        <form id="new-form" action="{% url 'new_delete' new.id %}" method="post">
+            {% csrf_token %}
+            <p>Are you sure to delete this new?</p>
+            <button id="submitButton" type="submit" class="btn btn-primary">Yes</button>
+            <a href="{% url 'new_detail' new.id %}">No. Go back</a>
+        </form>
+
+    </div>
+{% endblock content %}

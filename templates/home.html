@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <h2 class="mt-3">Latest News</h2>
+        <div class="cards mt-3 mb-3 d-flex flex-wrap justify-content-around">
+            {% for new in news %}
+                <div class="card mt-4" style="width: 22rem;">
+                    <img src="{{new.image}}" alt="New image" class="card-imd-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ new.title }}</h5>
+                        <p class="card-text">{{ new.body|truncatewords:15 }}</p>
+                        <a href="{% url 'new_detail' new.id %}" class="pro-link">Read More </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
